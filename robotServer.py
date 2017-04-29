@@ -5,7 +5,7 @@ import time
 
 from numpy import interp
 
-UDP_IP = "" # Accept all IPs
+UDP_IP = "" ## Accept all IPs
 UDP_PORT = 5005
 
 sock = socket.socket(socket.AF_INET, # Internet
