@@ -33,27 +33,27 @@ class GameController:
 	BUTTON_NAMES=_BUTTON_NAMES_PS4
 
 	axis={
-		0: '',
-		1: '',
-		2: '',
-		3: '',
-		4: '',
-		5: ''
+		0: 0.0,
+		1: 0.0,
+		2: 0.0,
+		3: 0.0,
+		4: 0.0,
+		5: 0.0
 	}
 	button={
-		0: '',
-		1: '',
-		2: '',
-		3: '',
-		4: '',
-		5: '',
-		6: '',
-		7: '',
-		8: '',
-		9: '',
-		10: '',
-		11: '',
-		12: ''
+		0: False,
+		1: False,
+		2: False,
+		3: False,
+		4: False,
+		5: False,
+		6: False,
+		7: False,
+		8: False,
+		9: False,
+		10: False,
+		11: False,
+		12: False
 	}
 	hat=(0,0)
 

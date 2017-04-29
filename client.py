@@ -11,13 +11,17 @@ UDP_IP = "192.168.42.1"
 #UDP_IP = "136.24.116.120"
 UDP_PORT = 5005
 
+verbose=False
+
 sock = None
 
 if __name__ == '__main__':
 	
+	print("UDP Game Controller Client")
+
 	myGameController=GameController()
 
-	print("Sending to {}:{}".format(UDP_IP,UDP_PORT))
+	#print("Sending to {}:{}".format(UDP_IP,UDP_PORT))
 
 	try:
 		sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) # UDP
@@ -31,12 +35,18 @@ if __name__ == '__main__':
 		# It will pickup the first game controller he finds
 		inputs=myGameController.poll()
 		
-		_message = pickle.dumps(inputs)
 
-		#print(_message)
+		if (int(time.time()*1000)%2==1):
+			star=' '
+		else:
+			star='*'	
+		print("\r[{}] Sending to {}:{} ".format(star,UDP_IP,UDP_PORT), end="")
+
+		if verbose:
+			print(inputs)
 
 		try :
-
+			_message = pickle.dumps(inputs)
 			sock.sendto(_message, (UDP_IP, UDP_PORT))
 
 			# receive data from client (data, addr)
