@@ -5,13 +5,12 @@ import time
 
 from numpy import interp
 
-UDP_IP = ""
+UDP_IP = "" # Accept all IPs
 UDP_PORT = 5005
 
 sock = socket.socket(socket.AF_INET, # Internet
   socket.SOCK_DGRAM) # UDP
 sock.bind((UDP_IP, UDP_PORT))
-
 
 LEFT_TRIM   = 0
 RIGHT_TRIM  = 0
@@ -27,11 +26,11 @@ while True:
 
     print(inputs)
 
-
     
     """
-    # Works
-    # To many polls to change velocity to the motor. It has to run his own thread with suitable refresh. 
+    # To many polls to change motor speed. It has to run his own thread with suitable refresh. 
+    # So it doens't try to change speed more than X times per second
+
     if inputs['buttons'][6]:
         axis=inputs['axis'][4]
         #speed=int(interp(axis,[-1,1],[0,255]))
@@ -44,6 +43,7 @@ while True:
         robot.backward(50, None)
     else:
         robot.stop()
+
     """
     
     if inputs['axis'][2]<-0.5:
@@ -61,6 +61,5 @@ while True:
         print("STOP")
         robot.stop()
     
-
     #time.sleep(0.0001)
 

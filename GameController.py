@@ -40,7 +40,6 @@ class GameController:
 		4: '',
 		5: ''
 	}
-
 	button={
 		0: '',
 		1: '',
@@ -80,8 +79,6 @@ class GameController:
 		return self.inputs
 
 	def process_event(self,event):
-			
-		
 
 		if event.type == JOYAXISMOTION:
 			if (abs(event.value)>self.axis_offset):
@@ -107,11 +104,6 @@ class GameController:
 
 		#print(self.inputs)
 
-		"""
-		if (event.type == pygame.KEYUP and event.key == pygame.K_c and event.mod & pygame.KMOD_CTRL):
-			pygame.quit()
-			sys.exit()
-		"""
 	def __init__(self):
 		pygame.init()
 		pygame.joystick.init()

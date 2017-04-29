@@ -10,7 +10,6 @@ from GameController import GameController
 UDP_IP = "192.168.42.1"
 #UDP_IP = "136.24.116.120"
 UDP_PORT = 5005
-MESSAGE = "Hello, World!"
 
 sock = None
 
@@ -29,20 +28,16 @@ if __name__ == '__main__':
 
 	while(True):
 		
+		# It will pickup the first game controller he finds
 		inputs=myGameController.poll()
 		
-		
-		#_message = json.dumps(inputs)
 		_message = pickle.dumps(inputs)
 
-		#print(_message, end=' ', flush=True)
 		#print(_message)
 
 		try :
-			#sock.sendto(_message.encode('utf-8'), (UDP_IP, UDP_PORT))
 
 			sock.sendto(_message, (UDP_IP, UDP_PORT))
-
 
 			# receive data from client (data, addr)
 			#d = sock.recvfrom(1024)
@@ -55,4 +50,5 @@ if __name__ == '__main__':
 			print('Error Code : ' + str(msg[0]) + ' Message ' + msg[1])
 			sys.exit()
 
+		# Throttle down a little to avoid buffer overflown
 		time.sleep(0.001)
