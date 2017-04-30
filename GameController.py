@@ -110,6 +110,6 @@ class GameController:
 		self.joysticks = [pygame.joystick.Joystick(x) for x in range(pygame.joystick.get_count())]
 		print('Controllers Detected:')
 		for (index,j) in enumerate(self.joysticks):
-			print("{}- '{}'".format(index,j.get_name()))
+			print("{}: '{}'".format(index,j.get_name()))
 
 		self.init_controller(0)

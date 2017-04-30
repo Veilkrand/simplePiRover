@@ -18,7 +18,7 @@ if __name__ == '__main__':
 
 	myGameController=GameController()
 
-	myClient=SimpleUDPClient(UDP_IP, UDP_PORT)
+	myClient=SimpleUDPClient(UDP_IP, UDP_PORT,pickle_protocol=2)
 
 
 	while(True):

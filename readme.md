@@ -25,7 +25,10 @@ Connect game controller to remote machine. Configure the correct server IP on cl
 
 ## Files
 - **client.py** UDP client that will connect the first game controller and start sending data to a predefined ip and port.
+- **client.py** Client when server is based on Python2.xx as ROS rospy base.
 - **GameController.py** Class to handle the bluetooth PS4 game controller.
+- **SimpleUDPClient.py**
+- **SimpleUDPServer.py**
 - **robotServer.py** UDP server to receive the remote game controller inputs and move the rover.
 - **Robot4WD.py** Class to handle the robot control using Adafruit Motor Hat. https://github.com/adafruit/Adafruit-Motor-HAT-Python-Library.git
 

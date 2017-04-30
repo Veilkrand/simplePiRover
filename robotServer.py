@@ -1,6 +1,6 @@
-import socket
 from Robot4WD import Robot4WD
-import pickle
+from SimpleUDPServer import SimpleUDPServer
+
 import time
 
 from numpy import interp
@@ -8,9 +8,7 @@ from numpy import interp
 UDP_IP = "" ## Accept all IPs
 UDP_PORT = 5005
 
-sock = socket.socket(socket.AF_INET, # Internet
-  socket.SOCK_DGRAM) # UDP
-sock.bind((UDP_IP, UDP_PORT))
+server=SimpleUDPServer(UDP_IP,UDP_PORT)
 
 LEFT_TRIM   = 0
 RIGHT_TRIM  = 0
@@ -18,13 +16,10 @@ RIGHT_TRIM  = 0
 robot = Robot4WD(left_trim=LEFT_TRIM, right_trim=RIGHT_TRIM,left_id1=1,right_id1=2,left_id2=3,right_id2=4)
 
 while True:
-    data, addr = sock.recvfrom(1024) # buffer size is 1024 bytes
 
-    #data=data.decode('utf-8')
+    inputs=server.listen()
 
-    inputs=pickle.loads(data)
-
-    print(inputs)
+    #print(inputs)
 
     
     """
