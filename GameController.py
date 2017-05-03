@@ -57,7 +57,11 @@ class GameController:
 	}
 	hat=(0,0)
 
-	inputs={}
+	inputs={
+			'axis' : axis,
+			'buttons' : button,
+			'hat' : hat
+		}
 
 	joystick=None
 	joysticks=None
@@ -108,8 +112,11 @@ class GameController:
 		pygame.init()
 		pygame.joystick.init()
 		self.joysticks = [pygame.joystick.Joystick(x) for x in range(pygame.joystick.get_count())]
-		print('Controllers Detected:')
-		for (index,j) in enumerate(self.joysticks):
-			print("{}: '{}'".format(index,j.get_name()))
+		if len(self.joysticks)>0:
+			print('Controllers Detected:')
+			for (index,j) in enumerate(self.joysticks):
+				print("{}: '{}'".format(index,j.get_name()))
+			self.init_controller(0)
+		else:
+			print("No controllers detected.")
 
-		self.init_controller(0)

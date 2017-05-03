@@ -39,7 +39,11 @@ class SimpleUDPClient(object):
 			print(data)
 
 		try :
-			#_message = pickle.dumps(data)
+			
+			# inject timestamp in milliseconds
+			data['timestamp']=time.time() * 1000
+
+
 			#Downgrade protocol to be compatible to python 2.x
 			_message = pickle.dumps(data,protocol=self.pickle_protocol)
 			#_message = str(data['buttons'][0]).encode('utf-8')

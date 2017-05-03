@@ -7,6 +7,7 @@ import pickle
 from GameController import GameController
 from SimpleUDPClient import SimpleUDPClient
 
+
 def print_help():
 	print('client.py -h <host> -p <port> [--verbose]')
 	sys.exit()
@@ -35,14 +36,15 @@ def main(argv):
 	
 	myGameController=GameController()
 
-	myClient=SimpleUDPClient(UDP_IP, UDP_PORT,verbose=VERBOSE)
+	myClient=SimpleUDPClient(UDP_IP, UDP_PORT)
 
 	while(True):
 		
+
 		# It will pickup the first game controller he finds
 		inputs=myGameController.poll()
 		
-		myClient.send(inputs,False)
+		myClient.send(inputs,VERBOSE)
 		
 		# Throttle down a little to avoid buffer overflown
 		#time.sleep(0.0005)
