@@ -10,6 +10,11 @@ https://github.com/adafruit/Adafruit-Motor-HAT-Python-Library.git
 `python3 robotServer.py`
 ### 3. Start the client on a remote machine
 Connect game controller to remote machine. Configure the correct server IP on client and run `python3 client.py` on the remote machine.
+
+`client.py -h <host> -p <port> [--verbose] [--python2]`
+
+Use the `--python2` or `-y` option to use the pickle protocol 2 to be backward compatible with Python2 (e.g. for ROS).
+
 ### 4. Control
 - **L2:** Forward
 - **R2:** Backward

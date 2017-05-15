@@ -21,9 +21,10 @@ def main(argv):
 	#UDP_IP = "136.24.116.120"
 	UDP_PORT = 5005
 	VERBOSE=False
+	PYTHON2=False
 
 	try:
-		opts, args = getopt.getopt(argv,"h:p:v",["host=","port=","verbose"])
+		opts, args = getopt.getopt(argv,"h:p:yv",["host=","port=","python2","verbose"])
 	except getopt.GetoptError:
 		print_help()
 	for opt, arg in opts:
@@ -31,12 +32,17 @@ def main(argv):
 			UDP_IP = arg
 		elif opt in ("-p", "--port"):
 			UDP_PORT = arg
+		elif opt in ("-y", "--python2"):
+			PYTHON2 = True
 		elif opt in ("-v", "--verbose"):
 			VERBOSE=True
 	
 	myGameController=GameController()
 
-	myClient=SimpleUDPClient(UDP_IP, UDP_PORT)
+	if PYTHON2:
+		myClient=SimpleUDPClient(UDP_IP, UDP_PORT,pickle_protocol=2)
+	else:
+		myClient=SimpleUDPClient(UDP_IP, UDP_PORT)
 
 	while(True):
 		
