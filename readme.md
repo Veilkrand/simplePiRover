@@ -34,4 +34,7 @@ Use the `--python2` or `-y` option to use the pickle protocol 2 to be backward c
 - **GameController.py** Class to handle the bluetooth PS4 game controller.
 - **SimpleUDPClient.py** Basic client class.
 - **SimpleUDPServer.py** Basic server class.
+- **test_SimpleUDPServerClass.py** A simple test to visualize a client.
+- **test_SimpleUDPServerClass_python2.py** A simple test to visualize a client.
+- **SimpleUDPServer_python2.py** Downgraded to be compatible with Python2.
 - **Robot4WD.py** Class to handle the robot control using Adafruit Motor Hat. https://github.com/adafruit/Adafruit-Motor-HAT-Python-Library.git

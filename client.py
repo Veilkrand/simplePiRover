@@ -9,15 +9,15 @@ from SimpleUDPClient import SimpleUDPClient
 
 
 def print_help():
-	print('client.py -h <host> -p <port> [--verbose]')
+	print('client.py -h <host> -p <port> [--verbose] [--python2]')
 	sys.exit()
 
 def main(argv):
 
 	print("UDP Game Controller Client")
 
-	#UDP_IP = "127.0.0.1"
-	UDP_IP = "192.168.42.1"
+	UDP_IP = "127.0.0.1"
+	#UDP_IP = "192.168.42.1"
 	#UDP_IP = "136.24.116.120"
 	UDP_PORT = 5005
 	VERBOSE=False
