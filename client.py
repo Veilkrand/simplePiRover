@@ -5,7 +5,7 @@ import sys, getopt
 import pickle
 
 from GameController import GameController
-from SimpleUDPClient import SimpleUDPClient
+from SimpleUDP.SimpleUDPClient import SimpleUDPClient
 
 
 def print_help():

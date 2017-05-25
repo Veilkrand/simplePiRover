@@ -1,6 +1,6 @@
 import pygame
-from pygame.locals import QUIT, JOYBUTTONUP, JOYBUTTONDOWN, JOYAXISMOTION, JOYHATMOTION
-
+#from pygame.locals import QUIT, JOYBUTTONUP, JOYBUTTONDOWN, JOYAXISMOTION, JOYHATMOTION
+from pygame.locals import *
 
 class GameController:
 
@@ -61,7 +61,7 @@ class GameController:
 			'axis' : axis,
 			'buttons' : button,
 			'hat' : hat
-		}
+	}
 
 	joystick=None
 	joysticks=None
@@ -103,7 +103,7 @@ class GameController:
 		self.inputs={
 			'axis' : self.axis,
 			'buttons' : self.button,
-			'hat' : self.hat
+			'hat' : self.hat,
 		}
 
 		#print(self.inputs)

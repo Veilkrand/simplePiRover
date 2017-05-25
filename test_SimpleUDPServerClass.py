@@ -1,4 +1,4 @@
-from SimpleUDPServer import SimpleUDPServer
+from SimpleUDP.SimpleUDPServer import SimpleUDPServer
 
 server=SimpleUDPServer("",5005)
 
