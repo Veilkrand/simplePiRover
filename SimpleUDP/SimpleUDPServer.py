@@ -37,15 +37,18 @@ class SimpleUDPServer(object):
 
 		inputs=pickle.loads(data)
 
+		#lag=int((time.time()*1000 - inputs['timestamp'])*1000)
+		lag=round((time.time()*1000 - inputs['timestamp']),1)
+
 		if (int(time.time()*1000)%2==1):
 			star=' '
 		else:
 			star='*'
 
 		if verbose:
-			print("\r[{}] Receiving from {}-{}: {!s}".format(star,addr[1],addr[0], inputs), end="")
+			print("\r[{}] Receiving from {}-{} ({}ms): {!s}".format(star,addr[1],addr[0],lag, inputs), end="")
 		else:
-			print("\r[{}] Receiving from {}-{}".format(star,addr[1],addr[0]), end="")
+			print("\r[{}] Receiving from {}-{} ({}ms)".format(star,addr[1],addr[0],lag), end="")
 		sys.stdout.flush()
 
 		return inputs

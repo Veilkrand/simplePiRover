@@ -13,6 +13,7 @@ UDP_PORT = 5005
 
 sock = None
 
+
 class SimpleUDPServer(object):
 
 	def __init__(self,UDP_IP,UDP_PORT):
@@ -42,10 +43,13 @@ class SimpleUDPServer(object):
 		else:
 			star='*'
 
+		#lag=int((time.time()*1000 - inputs['timestamp'])*1000)
+		lag=round((time.time()*1000 - inputs['timestamp']),1)
+
 		if verbose:
-			print "\r[%s] Receiving from %s-%s: %s" % (star,addr[1],addr[0], inputs),
+			print "\r[%s] Receiving from %s-%s (%sms): %s" % (star,addr[1],addr[0],lag, inputs),
 		else:
-			print "\r[%s] Receiving from %s-%s" % (star,addr[1],addr[0]),
+			print "\r[%s] Receiving from %s-%s (%sms)" % (star,addr[1],addr[0],lag),
 		sys.stdout.flush()
 
 		return inputs
