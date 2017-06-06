@@ -58,5 +58,5 @@ class SimpleUDPClient(object):
 			#print('Server reply : ' + reply)
 
 		except socket.error as msg:
-			print('Error Code : ' + str(msg[0]) + ' Message ' + msg[1])
+			print("Socket Error: %s" % msg)
 			sys.exit()
