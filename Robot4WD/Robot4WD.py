@@ -4,8 +4,6 @@ import atexit
 from Adafruit_MotorHAT import Adafruit_MotorHAT
 
 
-
-
 class Robot4WD(object):
 
     #handling states
@@ -134,7 +132,7 @@ class Robot4WD(object):
         if (self.moving_state==self.MOVING_RIGHT):
             return
 
-        self.moving_state=self.MOVING_RIGHT
+        self.moving_state = self.MOVING_RIGHT
 
         # Set motor speed and move both forward.
         self._left_speed(speed)
