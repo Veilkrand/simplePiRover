@@ -1,4 +1,4 @@
-from Robot4WD import Robot4WD
+from Robot4WD.Robot4WD import Robot4WD
 from SimpleUDP.SimpleUDPServer import SimpleUDPServer
 
 import time
