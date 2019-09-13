@@ -4,9 +4,8 @@ import json
 import sys, getopt
 import pickle
 
-from GameController import GameController
+from GameController.GameController import GameController
 from SimpleUDP.SimpleUDPClient import SimpleUDPClient
-
 
 def print_help():
 	print('client.py -h <host> -p <port> [--verbose] [--python2]')
@@ -40,7 +39,7 @@ def main(argv):
 	myGameController=GameController()
 
 	if PYTHON2:
-		myClient=SimpleUDPClient(UDP_IP, UDP_PORT,pickle_protocol=2)
+		myClient=SimpleUDPClient(UDP_IP, UDP_PORT, pickle_protocol=2)
 	else:
 		myClient=SimpleUDPClient(UDP_IP, UDP_PORT)
 

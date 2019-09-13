@@ -3,12 +3,12 @@ from SimpleUDP.SimpleUDPServer import SimpleUDPServer
 
 import time
 
-from numpy import interp
+# from numpy import interp
 
 UDP_IP = "" ## Accept all IPs
 UDP_PORT = 5005
 
-server=SimpleUDPServer(UDP_IP,UDP_PORT)
+server = SimpleUDPServer(UDP_IP, UDP_PORT)
 
 LEFT_TRIM   = 0
 RIGHT_TRIM  = 0
@@ -17,7 +17,7 @@ robot = Robot4WD(left_trim=LEFT_TRIM, right_trim=RIGHT_TRIM,left_id1=1,right_id1
 
 while True:
 
-    inputs=server.listen()
+    inputs = server.listen()
 
     #print(inputs)
 
