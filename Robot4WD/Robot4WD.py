@@ -14,7 +14,7 @@ class Robot4WD(object):
     MOVING_RIGHT=4
     moving_state=STOP
 
-    def __init__(self, addr=0x60, left_id1=1, right_id1=2,left_id2=3, right_id2=4, left_trim=0, right_trim=0,
+    def __init__(self, addr=0x60, left_id1=1, right_id1=2, left_id2=3, right_id2=4, left_trim=0, right_trim=0,
                  stop_at_exit=True):
         """Create an instance of the robot.  Can specify the following optional
         parameters:
@@ -49,26 +49,40 @@ class Robot4WD(object):
     def _left_speed(self, speed):
         """Set the speed of the left motor, taking into account its trim offset.
         """
-        assert 0 <= speed <= 255, 'Speed must be a value between 0 to 255 inclusive!'
-        speed += self._left_trim
-        speed = max(0, min(255, speed))  # Constrain speed to 0-255 after trimming.
-        self._left1.setSpeed(speed)
-        self._left2.setSpeed(speed)
+
+        _motor_speed = abs(speed) + self._left_trim
+        _motor_speed = max(0, min(255, _motor_speed))  # Constrain speed to 0-255 after trimming.
+        self._left1.setSpeed(_motor_speed)
+        self._left2.setSpeed(_motor_speed)
+
+        if speed > 0:
+            self._left1.run(Adafruit_MotorHAT.FORWARD)
+            self._left2.run(Adafruit_MotorHAT.FORWARD)
+        else:
+            self._left1.run(Adafruit_MotorHAT.BACKWARD)
+            self._left2.run(Adafruit_MotorHAT.BACKWARD)
+
 
     def _right_speed(self, speed):
         """Set the speed of the right motor, taking into account its trim offset.
         """
-        assert 0 <= speed <= 255, 'Speed must be a value between 0 to 255 inclusive!'
-        speed += self._right_trim
-        speed = max(0, min(255, speed))  # Constrain speed to 0-255 after trimming.
-        self._right1.setSpeed(speed)
-        self._right2.setSpeed(speed)
+        _motor_speed = abs(speed) + self._left_trim
+        _motor_speed = max(0, min(255, _motor_speed))  # Constrain speed to 0-255 after trimming.
+        self._right1.setSpeed(_motor_speed)
+        self._right2.setSpeed(_motor_speed)
+
+        if speed > 0:
+            self._right1.run(Adafruit_MotorHAT.FORWARD)
+            self._right2.run(Adafruit_MotorHAT.FORWARD)
+        else:
+            self._right1.run(Adafruit_MotorHAT.BACKWARD)
+            self._right2.run(Adafruit_MotorHAT.BACKWARD)
 
     def stop(self):
         """Stop all movement."""
 
-        if (self.moving_state==self.STOP):
-            return
+        # if (self.moving_state==self.STOP):
+        #     return
 
         self.moving_state=self.STOP
 
@@ -76,6 +90,45 @@ class Robot4WD(object):
         self._left2.run(Adafruit_MotorHAT.RELEASE)
         self._right1.run(Adafruit_MotorHAT.RELEASE)
         self._right2.run(Adafruit_MotorHAT.RELEASE)
+
+    def move_steering(self, speed, steering):
+        """
+        :param speed: -255,255
+        :param steering: -1, 1
+        :return:
+        """
+
+        _left_speed = speed
+        _right_speed = speed
+
+        if steering > 0: # turning right
+            _right_speed = _right_speed - int(_right_speed * abs(steering))
+        elif steering < 0: # turning left
+            _left_speed = _left_speed - int(_left_speed * abs(steering))
+
+        self._left_speed(_left_speed)
+        self._right_speed(_right_speed)
+
+    def turn(self, steering):
+        """
+
+        :param steering: -1, 1
+        :return:
+        """
+
+        speed = int(255 * steering)
+
+        self._left_speed(speed)
+        self._right_speed(-speed)
+
+
+    def move(self, speed):
+        """Forward or backward in realtime"""
+
+        self._left_speed(speed)
+        self._right_speed(speed)
+
+    # ---
 
     def forward(self, speed, seconds=None):
         """Move forward at the specified speed (0-255).  Will start moving
@@ -168,3 +221,37 @@ class Robot4WD(object):
         if seconds is not None:
             time.sleep(seconds)
             self.stop()
+
+
+
+class RobotControl:
+
+    LEFT_TRIM = 0
+    RIGHT_TRIM = 0
+    MIN_SPEED = 10  # [0, 255] to start moving forward
+    MIN_SPEED_STEERING = 170  # [0, 255] To switch from turning to steering
+    MIN_STEERING = 0.1  # [0, 1] To start turning
+    robot = Robot4WD(left_trim=LEFT_TRIM, right_trim=RIGHT_TRIM,
+                     left_id1=1,
+                     left_id2=2,
+                     right_id1=3,
+                     right_id2=4)
+
+    def __init__(self):
+        pass
+
+    def update(self, speed, steering):
+
+        motor_power = int(speed * 255)
+
+        if abs(motor_power) > self.MIN_SPEED_STEERING:
+            self.robot.move_steering(motor_power, steering)
+        else:
+            if abs(steering) > self.MIN_STEERING:
+                self.robot.turn(steering)
+            elif abs(motor_power) > self.MIN_SPEED:
+                self.robot.move(motor_power)
+            else:
+                self.robot.stop()
+
+        print(motor_power, steering)
