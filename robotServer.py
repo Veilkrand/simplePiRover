@@ -30,5 +30,5 @@ while True:
 
     robot.update(axis_speed, axis_steering)
 
-    #time.sleep(0.0001)
+    # time.sleep(0.001)
 

@@ -15,6 +15,7 @@ def main(argv):
 
 	print("UDP Game Controller Client")
 
+	POLL_INTERVAL = 0.03
 	UDP_IP = "127.0.0.1"
 	#UDP_IP = "192.168.42.1"
 	#UDP_IP = "136.24.116.120"
@@ -52,8 +53,8 @@ def main(argv):
 		myClient.send(inputs,VERBOSE)
 		
 		# Throttle down a little to avoid buffer overflown
-		#time.sleep(0.0005)
-		time.sleep(0.001)
+
+		time.sleep(POLL_INTERVAL)
 
 
 if __name__ == '__main__':
