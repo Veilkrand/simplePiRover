@@ -3,7 +3,15 @@
 ![rover](images/IMG_3115.JPG)
 Small robotic platform based on Raspberry Pi controlled by a remote PS4 game controller over a wireless network.
 
-## Kickstart Guide
+## TODOs (Feb. 2021): 
+- [ ] Migration to motorkit
+    https://learn.adafruit.com/adafruit-dc-and-stepper-motor-hat-for-raspberry-pi/installing-software
+- [ ] Support pan/tilt  
+- [ ] Refactor packages
+- [ ] Update doc. Picture. installation
+
+
+## Kickstart Guide (Outdated)
 ### 1. Install Adafruit Motor Hat in Raspberry Pi
 https://github.com/adafruit/Adafruit-Motor-HAT-Python-Library.git
 ### 2. Start server in Raspberry Pi
@@ -15,7 +23,7 @@ Connect game controller to remote machine. Configure the correct server IP on cl
 
 Use the `--python2` or `-y` option to use the pickle protocol 2 to be backward compatible with Python2 (e.g. for ROS).
 
-### 4. Control
+### 4. Control (Outdated)
 - **L2:** Forward
 - **R2:** Backward
 - **Right pad:** Spin left or right
@@ -28,7 +36,7 @@ Use the `--python2` or `-y` option to use the pickle protocol 2 to be backward c
 - 12V battery pack for motor power
 - USB based battery pack for Raspberry Pi 3
 
-## Files
+## Files (Outdated)
 - **client.py** UDP client that will connect the first game controller and start sending data to a predefined ip and port.
 - **robotServer.py** UDP server to receive the remote game controller inputs and move the rover.
 - **GameController.py** Class to handle the bluetooth PS4 game controller.
