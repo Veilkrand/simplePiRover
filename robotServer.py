@@ -11,9 +11,6 @@ UDP_PORT = 5005
 
 server = SimpleUDPServer(UDP_IP, UDP_PORT)
 
-LEFT_TRIM = 0
-RIGHT_TRIM = 0
-
 # robot = Robot4WD(left_trim=LEFT_TRIM, right_trim=RIGHT_TRIM, left_id1=1, right_id1=2, left_id2=3, right_id2=4)
 robot = RobotControl()
 pt = PanTiltController()
@@ -28,8 +25,8 @@ while True:
     axis_pan = inputs['axis'][0]
     axis_tilt = inputs['axis'][1]
 
-    hat_x = -inputs['hat'][0]
-    hat_y = inputs['hat'][1]
+    hat_x = -inputs['hat'][0] * 2
+    hat_y = inputs['hat'][1] * 2
 
     robot.update(axis_speed, axis_steering)
 
