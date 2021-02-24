@@ -1,4 +1,5 @@
 from Robot4WD.Robot4WD import RobotControl
+from PanTilt.PanTilt import PanTiltController
 from SimpleUDP.SimpleUDPServer import SimpleUDPServer
 
 import time
@@ -17,6 +18,8 @@ RIGHT_TRIM = 0
 
 # robot = Robot4WD(left_trim=LEFT_TRIM, right_trim=RIGHT_TRIM, left_id1=1, right_id1=2, left_id2=3, right_id2=4)
 robot = RobotControl()
+pt = PanTiltController()
+
 while True:
 
     inputs = server.listen()
@@ -29,6 +32,8 @@ while True:
     hat_y = inputs['axis'][1]
 
     robot.update(axis_speed, axis_steering)
+
+    pt.move(hat_x, hat_y)
 
     # time.sleep(0.001)
 
