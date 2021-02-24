@@ -26,14 +26,17 @@ while True:
 
     axis_speed = inputs['axis'][5]
     axis_steering = inputs['axis'][2]
+
     axis_pan = inputs['axis'][0]
     axis_tilt = inputs['axis'][1]
-    hat_x = inputs['axis'][0]
-    hat_y = inputs['axis'][1]
+
+    hat_x = inputs['hat'][0]
+    hat_y = inputs['hat'][1]
 
     robot.update(axis_speed, axis_steering)
 
     pt.move(hat_x, hat_y)
+    pt.look(axis_pan, axis_tilt)
 
     # time.sleep(0.001)
 
