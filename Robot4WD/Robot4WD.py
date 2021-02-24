@@ -17,7 +17,7 @@ class Robot4WD(object):
 
     def __init__(self, address=0x60,
                  left_id1=1, right_id1=2, left_id2=3, right_id2=4,
-                 left_trim=0, right_trim=0
+                 left1_trim=0, left2_trim=0, right1_trim=0, right2_trim=0
                  ):
         """Create an instance of the robot.  Can specify the following optional
         parameters:
@@ -31,8 +31,10 @@ class Robot4WD(object):
                          value to prevent damage to the bot on program crash!).
         """
 
-        self.left_trim = left_trim
-        self.right_trim = right_trim
+        self.left1_trim = left1_trim
+        self.left2_trim = left2_trim
+        self.right1_trim = right1_trim
+        self.right2_trim = right2_trim
 
         self.kit = MotorKit(address=address)
 
@@ -46,17 +48,19 @@ class Robot4WD(object):
 
     def _left_speed(self, speed):
 
-        _motor_speed = max(-1, min(1, speed + self.left_trim))  # Constrain speed to [-1,1] after trimming.
+        _motor_speed1 = max(-1.0, min(1.0, speed + self.left1_trim))  # Constrain speed to [-1,1] after trimming.
+        _motor_speed2 = max(-1.0, min(1.0, speed + self.left2_trim))  # Constrain speed to [-1,1] after trimming.
 
-        self.motor_left1.throttle = _motor_speed
-        self.motor_left2.throttle = _motor_speed
+        self.motor_left1.throttle = _motor_speed1
+        self.motor_left2.throttle = _motor_speed2
 
     def _right_speed(self, speed):
 
-        _motor_speed = max(-1, min(1, speed + self.right_trim))  # Constrain speed to [-1,1] after trimming.
+        _motor_speed1 = max(-1.0, min(1.0, speed + self.right1_trim))  # Constrain speed to [-1,1] after trimming.
+        _motor_speed2 = max(-1.0, min(1.0, speed + self.right2_trim))  # Constrain speed to [-1,1] after trimming.
 
-        self.motor_right1.throttle = _motor_speed
-        self.motor_right2.throttle = _motor_speed
+        self.motor_right1.throttle = _motor_speed1
+        self.motor_right2.throttle = _motor_speed2
 
     def stop(self):
         """Stop all movement. release the motors"""
@@ -88,9 +92,9 @@ class Robot4WD(object):
         _right_speed = speed
 
         if steering > 0:  # turning right
-            _right_speed = _right_speed - (_right_speed * abs(steering))
+            _right_speed = speed - (speed * steering)
         elif steering < 0:  # turning left
-            _left_speed = _left_speed - (_left_speed * abs(steering))
+            _left_speed = speed - (speed * -steering)
 
         self._left_speed(_left_speed)
         self._right_speed(_right_speed)
