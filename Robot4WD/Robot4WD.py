@@ -15,14 +15,13 @@ class Robot4WD(object):
     MOVING_RIGHT = 4
     moving_state = STOP
 
-    def __init__(self, addr=0x60, left_id1=1, right_id1=2, left_id2=3, right_id2=4,
-                 left_trim=0, right_trim=0,
-                 stop_at_exit=True):
+    def __init__(self, address=0x60,
+                 left_id1=1, right_id1=2, left_id2=3, right_id2=4,
+                 left_trim=0, right_trim=0
+                 ):
         """Create an instance of the robot.  Can specify the following optional
         parameters:
          - addr: The I2C address of the motor HAT, default is 0x60.
-         - left_id: The ID of the left motor, default is 1.
-         - right_id: The ID of the right motor, default is 2.
          - left_trim: Amount to offset the speed of the left motor, can be positive
                       or negative and use useful for matching the speed of both
                       motors.  Default is 0.
@@ -35,44 +34,48 @@ class Robot4WD(object):
         self.left_trim = left_trim
         self.right_trim = right_trim
 
-        self.kit = MotorKit()
+        self.kit = MotorKit(address=address)
+
+        self.motor_left1 = self.kit.motor1
+        self.motor_left2 = self.kit.motor2
+        self.motor_right1 = self.kit.motor3
+        self.motor_right2 = self.kit.motor4
 
         # Configure all motors to stop at program exit if desired.
-        if stop_at_exit:
-            atexit.register(self.stop)
+        atexit.register(self.stop)
 
     def _left_speed(self, speed):
 
         _motor_speed = max(-1, min(1, speed + self.left_trim))  # Constrain speed to [-1,1] after trimming.
 
-        self.kit.motor1.throttle = _motor_speed
-        self.kit.motor2.throttle = _motor_speed
+        self.motor_left1.throttle = _motor_speed
+        self.motor_left1.throttle = _motor_speed
 
     def _right_speed(self, speed):
 
         _motor_speed = max(-1, min(1, speed + self.right_trim))  # Constrain speed to [-1,1] after trimming.
 
-        self.kit.motor3.throttle = _motor_speed
-        self.kit.motor4.throttle = _motor_speed
+        self.motor_right1.throttle = _motor_speed
+        self.motor_right2.throttle = _motor_speed
 
     def stop(self):
         """Stop all movement. release the motors"""
 
         self.moving_state = self.STOP
 
-        self.kit.motor1.throttle = None
-        self.kit.motor2.throttle = None
-        self.kit.motor3.throttle = None
-        self.kit.motor4.throttle = None
+        self.motor_left1.throttle = None
+        self.motor_left2.throttle = None
+        self.motor_right1.throttle = None
+        self.motor_right2.throttle = None
 
     def brake(self):
 
         self.moving_state = self.STOP
 
-        self.kit.motor1.throttle = 0
-        self.kit.motor2.throttle = 0
-        self.kit.motor3.throttle = 0
-        self.kit.motor4.throttle = 0
+        self.motor_left1.throttle = 0
+        self.motor_left2.throttle = 0
+        self.motor_right1.throttle = 0
+        self.motor_right2.throttle = 0
 
     def move_steering(self, speed, steering):
         """
