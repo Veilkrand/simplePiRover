@@ -49,7 +49,7 @@ class Robot4WD(object):
         _motor_speed = max(-1, min(1, speed + self.left_trim))  # Constrain speed to [-1,1] after trimming.
 
         self.motor_left1.throttle = _motor_speed
-        self.motor_left1.throttle = _motor_speed
+        self.motor_left2.throttle = _motor_speed
 
     def _right_speed(self, speed):
 
