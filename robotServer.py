@@ -11,8 +11,15 @@ if __name__ == "__main__":
 
     server = SimpleUDPServer(UDP_IP, UDP_PORT)
 
-    robot = RobotControl()
-    pt = PanTiltController()
+    try:
+        robot = RobotControl()
+    except:
+        robot = None
+
+    try:
+        pt = PanTiltController()
+    except:
+        pt = None
 
     while True:
 
@@ -27,10 +34,12 @@ if __name__ == "__main__":
         hat_x = -inputs['hat'][0]
         hat_y = -inputs['hat'][1]
 
-        robot.update(axis_speed, axis_steering)
+        if robot:
+            robot.update(axis_speed, axis_steering)
 
-        pt.update_center(hat_x, hat_y)
-        pt.look(axis_pan, axis_tilt)
+        if pt:
+            pt.update_center(hat_x, hat_y)
+            pt.look(axis_pan, axis_tilt)
 
         # client is already throttled down, there's no need to do it here. We need to process incoming packets as soon
         # as possible.
