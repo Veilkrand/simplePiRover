@@ -1,37 +1,37 @@
 from Robot4WD.RobotControl import RobotControl
 from PanTilt.PanTilt import PanTiltController
 from SimpleUDP.SimpleUDPServer import SimpleUDPServer
-
-import time
-
+# import time
 # from numpy import interp
 
-UDP_IP = "" ## Accept all IPs
-UDP_PORT = 5005
+if __name__ == "__main__":
 
-server = SimpleUDPServer(UDP_IP, UDP_PORT)
+    UDP_IP = ""  # Accept all IPs
+    UDP_PORT = 5005
 
-# robot = Robot4WD(left_trim=LEFT_TRIM, right_trim=RIGHT_TRIM, left_id1=1, right_id1=2, left_id2=3, right_id2=4)
-robot = RobotControl()
-pt = PanTiltController()
+    server = SimpleUDPServer(UDP_IP, UDP_PORT)
 
-while True:
+    robot = RobotControl()
+    pt = PanTiltController()
 
-    inputs = server.listen()
+    while True:
 
-    axis_speed = inputs['axis'][5]
-    axis_steering = inputs['axis'][2]
+        inputs = server.listen()
 
-    axis_pan = -inputs['axis'][0]
-    axis_tilt = inputs['axis'][1]
+        axis_speed = inputs['axis'][5]
+        axis_steering = inputs['axis'][2]
 
-    hat_x = -inputs['hat'][0]
-    hat_y = -inputs['hat'][1]
+        axis_pan = -inputs['axis'][0]
+        axis_tilt = inputs['axis'][1]
 
-    robot.update(axis_speed, axis_steering)
+        hat_x = -inputs['hat'][0]
+        hat_y = -inputs['hat'][1]
 
-    pt.update_center(hat_x, hat_y)
-    pt.look(axis_pan, axis_tilt)
+        robot.update(axis_speed, axis_steering)
 
-    # time.sleep(0.001)
+        pt.update_center(hat_x, hat_y)
+        pt.look(axis_pan, axis_tilt)
 
+        # client is already throttled down, there's no need to do it here. We need to process incoming packets as soon
+        # as possible.
+        # time.sleep(0.001)

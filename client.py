@@ -2,7 +2,6 @@ import time
 import sys
 import getopt
 
-
 from GameController.GameController import GameController
 from SimpleUDP.SimpleUDPClient import SimpleUDPClient
 
@@ -17,12 +16,13 @@ def main(argv):
 	POLL_INTERVAL = 0.03
 	UDP_IP = "127.0.0.1"
 	UDP_PORT = 5005
-	VERBOSE=False
+	VERBOSE = False
 
 	try:
-		opts, args = getopt.getopt(argv,"h:p:yv",["host=","port=","python2","verbose"])
+		opts, args = getopt.getopt(argv, "h:p:yv", ["host=", "port=", "python2", "verbose"])
 	except getopt.GetoptError:
 		print_help()
+
 	for opt, arg in opts:
 		if opt in ("-h", "--host"):
 			UDP_IP = arg
@@ -35,8 +35,7 @@ def main(argv):
 
 	myClient=SimpleUDPClient(UDP_IP, UDP_PORT)
 
-	while(True):
-		
+	while True:
 
 		# It will pickup the first game controller he finds
 		inputs = myGameController.poll()
