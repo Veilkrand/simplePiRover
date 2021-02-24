@@ -1,5 +1,6 @@
 import time
-import sys, getopt
+import sys
+import getopt
 
 
 from GameController.GameController import GameController
