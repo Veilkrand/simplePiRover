@@ -15,8 +15,6 @@ def main(argv):
 
 	POLL_INTERVAL = 0.03
 	UDP_IP = "127.0.0.1"
-	#UDP_IP = "192.168.42.1"
-	#UDP_IP = "136.24.116.120"
 	UDP_PORT = 5005
 	VERBOSE=False
 
