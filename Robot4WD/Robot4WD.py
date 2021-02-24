@@ -88,15 +88,17 @@ class Robot4WD(object):
         :return:
         """
 
+
         if steering > 0:  # turning right
-            _left_speed = speed
-            _right_speed = speed - (speed * steering * 1.5)
+            _left_speed = speed * 1.4
+            _right_speed = speed - (speed * steering * 1.4)
         elif steering < 0:  # turning left
-            _left_speed = speed - (speed * -steering * 1.5)
-            _right_speed = speed
+            _left_speed = speed - (speed * -steering * 1.4)
+            _right_speed = speed * 1.4
         else:
             _left_speed = speed
             _right_speed = speed
+
 
         self._left_speed(_left_speed)
         self._right_speed(_right_speed)
