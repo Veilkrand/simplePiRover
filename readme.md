@@ -12,8 +12,16 @@ Small robotic platform based on Raspberry Pi controlled by a remote PS4 game con
 
 
 ## Kickstart Guide (Outdated)
-### 1. Install Adafruit Motor Hat in Raspberry Pi
+
+### 1. Install requirements
+
 https://github.com/adafruit/Adafruit-Motor-HAT-Python-Library.git
+
+### 1.5. Install dependencies in Ubuntu machine:
+`sudo apt-get install python3-smbus`  
+
+
+
 ### 2. Start server in Raspberry Pi
 `python3 robotServer.py`
 ### 3. Start the client on a remote machine

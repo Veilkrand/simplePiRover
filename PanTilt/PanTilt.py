@@ -25,4 +25,4 @@ class PanTiltController:
         self.pan = self._clamp(-90, pan + self.pan, 90)
         self.tilt = self._clamp(-90, tilt + self.tilt, 90)
         pt.pan(self.pan)
-        pt.tilt(self.tilt, 90)
+        pt.tilt(self.tilt)
