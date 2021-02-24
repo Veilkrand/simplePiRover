@@ -25,6 +25,9 @@ if __name__ == "__main__":
 
         inputs = server.listen()
 
+        if not inputs:
+            continue
+
         axis_speed = inputs['axis'][5]
         axis_steering = inputs['axis'][2]
 

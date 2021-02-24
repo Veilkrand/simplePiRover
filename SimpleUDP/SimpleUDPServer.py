@@ -12,6 +12,7 @@ class SimpleUDPServer(object):
 	def __init__(self, UDP_IP="", UDP_PORT=5005):
 		self.UDP_IP = UDP_IP
 		self.UDP_PORT = UDP_PORT
+		self.last_timestamp_received = 0
 		try:
 			self.sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 			self.sock.bind((UDP_IP, UDP_PORT))
@@ -23,25 +24,29 @@ class SimpleUDPServer(object):
 
 	def listen(self, verbose=False):
 		
-		try :
-			data, addr = self.sock.recvfrom(1024) # buffer size is 1024 bytes
+		try:
+			data, addr = self.sock.recvfrom(512)  # buffer size is 1024 bytes
 		except socket.error as msg:
 			print('Error Code : ' + str(msg[0]) + ' Message ' + msg[1])
 			sys.exit()
 
 		inputs = pickle.loads(data)
 
-		lag = round((time.time()*1000 - inputs['timestamp']), 1)
+		lag = int(time.time()*1000) - inputs['timestamp']
 
 		if (int(time.time()*1000)%2==1):
-			star=' '
+			star = ' '
 		else:
-			star='*'
+			star = '*'
 
 		if verbose:
-			print("\r[{}] Receiving from {}-{} ({}ms): {!s}".format(star,addr[1],addr[0],lag, inputs), end="")
+			print("\r[{}] Receiving from {}-{} ({}ms): {!s}".format(star, addr[1], addr[0], lag, inputs), end="")
 		else:
-			print("\r[{}] Receiving from {}-{} ({}ms)".format(star,addr[1],addr[0],lag), end="")
+			print("\r[{}] Receiving from {}-{} ({}ms)".format(star, addr[1], addr[0], lag), end="")
 		sys.stdout.flush()
 
-		return inputs
+		if self.last_timestamp_received >= inputs['timestamp']:
+			return None
+		else:
+			self.last_timestamp_received = inputs['timestamp']
+			return inputs

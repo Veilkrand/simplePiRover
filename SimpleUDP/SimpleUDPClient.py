@@ -12,7 +12,7 @@ class SimpleUDPClient(object):
 
 	sock = None
 
-	def __init__(self, UDP_IP="127.0.0.1", UDP_PORT=5005, pickle_protocol=3):
+	def __init__(self, UDP_IP="127.0.0.1", UDP_PORT=5005, pickle_protocol=pickle.HIGHEST_PROTOCOL):
 		self.UDP_IP = UDP_IP
 		self.UDP_PORT = UDP_PORT
 		self.pickle_protocol = pickle_protocol
@@ -37,7 +37,7 @@ class SimpleUDPClient(object):
 		try:
 			
 			# inject timestamp in milliseconds
-			data['timestamp'] = time.time() * 1000
+			data['timestamp'] = int(time.time() * 1000)
 
 			_message = pickle.dumps(data, protocol=self.pickle_protocol)
 
