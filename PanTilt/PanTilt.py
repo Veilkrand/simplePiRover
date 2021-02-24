@@ -18,11 +18,18 @@ class PanTiltController:
         pt.tilt(self.tilt)
 
     def look(self, pan, tilt):
-        pt.pan(self._clamp(-90, pan + self.pan, 90))
-        pt.tilt(self._clamp(-90, tilt + self.tilt, 90))
+        pt.pan(self._clamp(-90, int(pan * 90) + self.pan, 90))
+        pt.tilt(self._clamp(-90, int(tilt * 90) + self.tilt, 90))
 
-    def move(self, pan, tilt):
+    def update_center(self, pan, tilt):
+
+
+        # if pan > 0.5:
+        #     self.pan = self._clamp(-90, self.pan + 1, 90)
+        # elif pan < 0.5:
+
         self.pan = self._clamp(-90, pan + self.pan, 90)
         self.tilt = self._clamp(-90, tilt + self.tilt, 90)
-        pt.pan(self.pan)
-        pt.tilt(self.tilt)
+
+        # pt.pan(self.pan)
+        # pt.tilt(self.tilt)

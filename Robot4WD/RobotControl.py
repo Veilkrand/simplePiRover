@@ -27,7 +27,7 @@ class RobotControl:
             if abs(steering) > self.MIN_STEERING:
                 self.robot.turn(steering)
             elif abs(motor_power) > self.MIN_SPEED:
-                self.robot.move(motor_power)
+                self.robot.update_center(motor_power)
             else:
                 self.robot.stop()
 
