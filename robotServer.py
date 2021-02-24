@@ -6,8 +6,6 @@ import time
 
 # from numpy import interp
 
-
-
 UDP_IP = "" ## Accept all IPs
 UDP_PORT = 5005
 

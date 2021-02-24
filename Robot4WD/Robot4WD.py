@@ -226,6 +226,7 @@ class Robot4WD(object):
 
 class RobotControl:
 
+
     LEFT_TRIM = 0
     RIGHT_TRIM = 0
     MIN_SPEED = 10  # [0, 255] to start moving forward

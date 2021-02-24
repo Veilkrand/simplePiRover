@@ -1,14 +1,27 @@
 import pantilthat as pt
 
-class PanTiltController:
 
-    def __init__(self, pan_offset=0, tilt_offset=0):
+class PanTiltController:
+    pan = 0
+    tilt = 0
+
+    def __init__(self,
+                 pan_offset=0, tilt_offset=0,
+                 pan_max=90, pan_min=-90,
+                 tilt_max=90, tilt_min=-90):
+
         self.pan_offset = pan_offset
         self.tilt_offset = tilt_offset
 
+        self.pan_max = pan_max
+        self.pan_min = pan_min
+        self.tilt_max = tilt_max
+        self.tilt_min = tilt_min
+
         self.center()
 
-    def _clamp(self, minimum, x, maximum):
+    @staticmethod
+    def _clamp(minimum, x, maximum):
         return max(minimum, min(x, maximum))
 
     def center(self):
@@ -18,18 +31,10 @@ class PanTiltController:
         pt.tilt(self.tilt)
 
     def look(self, pan, tilt):
-        pt.pan(self._clamp(-90, int(pan * 90) + self.pan, 90))
-        pt.tilt(self._clamp(-90, int(tilt * 90) + self.tilt, 90))
+        pt.pan(self._clamp(self.pan_min, int(pan * self.pan_max) + self.pan, self.pan_max))
+        pt.tilt(self._clamp(self.tilt_min, int(tilt * self.tilt_max) + self.tilt, self.tilt_max))
 
     def update_center(self, pan, tilt):
 
-
-        # if pan > 0.5:
-        #     self.pan = self._clamp(-90, self.pan + 1, 90)
-        # elif pan < 0.5:
-
-        self.pan = self._clamp(-90, pan + self.pan, 90)
-        self.tilt = self._clamp(-90, tilt + self.tilt, 90)
-
-        # pt.pan(self.pan)
-        # pt.tilt(self.tilt)
+        self.pan = self._clamp(self.pan_min, pan + self.pan, self.pan_max)
+        self.tilt = self._clamp(self.tilt_min, tilt + self.tilt, self.tilt_max)
