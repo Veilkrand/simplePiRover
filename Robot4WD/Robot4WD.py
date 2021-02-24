@@ -92,9 +92,9 @@ class Robot4WD(object):
         _right_speed = speed
 
         if steering > 0:  # turning right
-            _right_speed = speed - (speed * steering)
+            _right_speed = speed - (speed * steering * 1.5)
         elif steering < 0:  # turning left
-            _left_speed = speed - (speed * -steering)
+            _left_speed = speed - (speed * -steering * 1.5)
 
         self._left_speed(_left_speed)
         self._right_speed(_right_speed)
