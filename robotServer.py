@@ -28,7 +28,7 @@ if __name__ == "__main__":
         if not inputs:
             continue
 
-        axis_speed = inputs['axis'][5]
+        axis_speed = -inputs['axis'][5]
         axis_steering = inputs['axis'][2]
 
         axis_pan = -inputs['axis'][0]
