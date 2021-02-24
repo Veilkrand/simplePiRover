@@ -7,9 +7,9 @@ class RobotControl:
     LEFT2_TRIM = 0
     RIGHT1_TRIM = 0
     RIGHT2_TRIM = 0
-    MIN_SPEED = 0.15  # [0, 1] absolute to start moving forward
+    MIN_SPEED = 0.25  # [0, 1] absolute to start moving forward
     MIN_STEERING = 0.1  # [0, 1] Absolute to start turning
-    MIN_SPEED_STEERING = 0.6  # [0, 1] absolute o switch from turning to steering
+    MIN_SPEED_STEERING = 0.5  # [0, 1] absolute o switch from turning to steering
     robot = Robot4WD(left1_trim=LEFT1_TRIM, right1_trim=RIGHT1_TRIM,
                      left2_trim=LEFT2_TRIM, right2_trim=RIGHT2_TRIM,
                      )
