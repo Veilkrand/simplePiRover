@@ -7,9 +7,11 @@ Small robotic platform based on Raspberry Pi controlled by a remote PS4 game con
 - [ ] Migration to motorkit
     https://learn.adafruit.com/adafruit-dc-and-stepper-motor-hat-for-raspberry-pi/installing-software
     https://github.com/adafruit/Adafruit-Motor-HAT-Python-Library.git
+- [ ] Picture.
 - [X] Support pan/tilt  
 - [X] Refactor packages
-- [ ] Update doc. Picture. installation
+- [X] Update doc.  
+- [X] installation
 
 
 ## Kickstart Guide
@@ -27,9 +29,7 @@ Small robotic platform based on Raspberry Pi controlled by a remote PS4 game con
 ### 3. Start the client on a remote machine
 Connect game controller to remote machine. Configure the correct server IP on client and run `python3 client.py` on the remote machine.
 
-`client.py -h <host> -p <port> [--verbose] [--python2]`
-
-Use the `--python2` or `-y` option to use the pickle protocol 2 to be backward compatible with Python2 (e.g. for ROS).
+`client.py -h <host> -p <port> [--verbose]`
 
 ### Controller
 - **Right pad:** Speed, turning and steering

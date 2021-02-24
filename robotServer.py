@@ -1,4 +1,4 @@
-from Robot4WD.Robot4WD import RobotControl
+from Robot4WD.RobotControl import RobotControl
 from PanTilt.PanTilt import PanTiltController
 from SimpleUDP.SimpleUDPServer import SimpleUDPServer
 
@@ -25,8 +25,8 @@ while True:
     axis_pan = -inputs['axis'][0]
     axis_tilt = inputs['axis'][1]
 
-    hat_x = -inputs['hat'][0] * 2
-    hat_y = -inputs['hat'][1] * 2
+    hat_x = -inputs['hat'][0]
+    hat_y = -inputs['hat'][1]
 
     robot.update(axis_speed, axis_steering)
 

@@ -5,6 +5,8 @@ class PanTiltController:
     pan = 0
     tilt = 0
 
+    ANGLE_STEP_CENTERING = 2
+
     def __init__(self,
                  pan_offset=0, tilt_offset=0,
                  pan_max=90, pan_min=-90,
@@ -35,6 +37,9 @@ class PanTiltController:
         pt.tilt(self._clamp(self.tilt_min, int(tilt * self.tilt_max) + self.tilt, self.tilt_max))
 
     def update_center(self, pan, tilt):
+
+        pan = pan * self.ANGLE_STEP_CENTERING
+        tilt = tilt * self.ANGLE_STEP_CENTERING
 
         self.pan = self._clamp(self.pan_min, pan + self.pan, self.pan_max)
         self.tilt = self._clamp(self.tilt_min, tilt + self.tilt, self.tilt_max)
