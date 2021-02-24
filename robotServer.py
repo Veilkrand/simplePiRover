@@ -26,7 +26,7 @@ while True:
     axis_tilt = inputs['axis'][1]
 
     hat_x = -inputs['hat'][0] * 2
-    hat_y = inputs['hat'][1] * 2
+    hat_y = -inputs['hat'][1] * 2
 
     robot.update(axis_speed, axis_steering)
 
