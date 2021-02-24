@@ -1,14 +1,12 @@
-import socket
 import time
-import json
 import sys, getopt
-import pickle
+
 
 from GameController.GameController import GameController
 from SimpleUDP.SimpleUDPClient import SimpleUDPClient
 
 def print_help():
-	print('client.py -h <host> -p <port> [--verbose] [--python2]')
+	print('client.py -h <host> -p <port> [--verbose]')
 	sys.exit()
 
 def main(argv):
@@ -21,7 +19,6 @@ def main(argv):
 	#UDP_IP = "136.24.116.120"
 	UDP_PORT = 5005
 	VERBOSE=False
-	PYTHON2=False
 
 	try:
 		opts, args = getopt.getopt(argv,"h:p:yv",["host=","port=","python2","verbose"])
@@ -32,25 +29,20 @@ def main(argv):
 			UDP_IP = arg
 		elif opt in ("-p", "--port"):
 			UDP_PORT = arg
-		elif opt in ("-y", "--python2"):
-			PYTHON2 = True
 		elif opt in ("-v", "--verbose"):
 			VERBOSE=True
 	
 	myGameController=GameController()
 
-	if PYTHON2:
-		myClient=SimpleUDPClient(UDP_IP, UDP_PORT, pickle_protocol=2)
-	else:
-		myClient=SimpleUDPClient(UDP_IP, UDP_PORT)
+	myClient=SimpleUDPClient(UDP_IP, UDP_PORT)
 
 	while(True):
 		
 
 		# It will pickup the first game controller he finds
-		inputs=myGameController.poll()
+		inputs = myGameController.poll()
 		
-		myClient.send(inputs,VERBOSE)
+		myClient.send(inputs, VERBOSE)
 		
 		# Throttle down a little to avoid buffer overflown
 
@@ -59,4 +51,3 @@ def main(argv):
 
 if __name__ == '__main__':
 	main(sys.argv[1:])
-	

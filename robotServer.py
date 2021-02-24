@@ -22,7 +22,7 @@ while True:
     axis_speed = inputs['axis'][5]
     axis_steering = inputs['axis'][2]
 
-    axis_pan = inputs['axis'][0]
+    axis_pan = -inputs['axis'][0]
     axis_tilt = inputs['axis'][1]
 
     hat_x = -inputs['hat'][0] * 2
