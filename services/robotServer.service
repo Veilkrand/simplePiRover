@@ -1,0 +1,10 @@
+[Unit]
+Description=Robot Server
+After=multi-user.target
+
+[Service]
+User=ubuntu
+ExecStart=/home/ubuntu/simplePiRover/robotServer.py
+
+[Install]
+WantedBy=multi-user.target
