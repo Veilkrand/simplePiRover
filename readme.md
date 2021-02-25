@@ -1,21 +1,9 @@
 # Simple Wireless Rover for Raspberry Pi
 
-![rover](images/IMG_3115.JPG)
+![rover](images/piRover_new.jpg)
 Small robotic platform based on Raspberry Pi controlled by a remote PS4 game controller over a wireless network.
 
-## TODOs (Feb. 2021): 
-- [ ] Migration to motorkit
-    https://learn.adafruit.com/adafruit-dc-and-stepper-motor-hat-for-raspberry-pi/installing-software
-    https://github.com/adafruit/Adafruit-Motor-HAT-Python-Library.git
-- [ ] Picture.
-- [X] Support pan/tilt  
-- [X] Refactor packages
-- [X] Update doc.  
-- [X] installation
-
-
 ## Kickstart Guide
-
 
 ### 1. Install requirements
 `pip3 install -r requirements.txt`

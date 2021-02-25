@@ -1,0 +1,10 @@
+[Unit]
+Description=TCP Video Server
+After=multi-user.target
+
+[Service]
+User=ubuntu
+ExecStart=/usr/local/bin/startTcpVideoServer.sh
+
+[Install]
+WantedBy=multi-user.target
