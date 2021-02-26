@@ -27,8 +27,10 @@ Connect game controller to remote machine. Configure the correct server IP on cl
 
 ## Current Hardware
 - Raspberry Pi 3 with Ubuntu Server LTS 20.04
-- Adafruit Motor Hat https://www.adafruit.com/product/2348 
-- 4x 5-12V DC gear motors.
+- Adafruit Motor Hat https://www.adafruit.com/product/2348
+- Pimorini Pantilt Hat https://shop.pimoroni.com/products/pan-tilt-hat 
+- 4x 5-12V DC gear motors
 - 12V battery pack for motor power
-- USB based battery pack for Raspberry Pi 3
+- USB battery pack for Raspberry Pi 3
 
+ethernets:
