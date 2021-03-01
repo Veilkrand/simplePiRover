@@ -4,9 +4,7 @@ LEFT_TRIM = 0
 RIGHT_TRIM = 0
 
 print("Running forward for 5 seconds...")
-robot = Robot4WD(left_trim=LEFT_TRIM,
-                 right_trim=RIGHT_TRIM,
-                 )
+robot = Robot4WD(left1_trim=0, left2_trim=0, right1_trim=0, right2_trim=0)
 
 robot.forward(0.5, 5)
 
