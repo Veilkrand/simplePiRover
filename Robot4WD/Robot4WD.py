@@ -1,7 +1,6 @@
 import time
 import atexit
 
-from Adafruit_MotorHAT import Adafruit_MotorHAT
 from adafruit_motorkit import MotorKit
 
 
